@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { getLinkBySlug } from "../services/api";
 
 export const GoTo = () => {
-  const [fetching, setFetching] = useState(true);
   const [error, setError] = useState();
   let { slug } = useParams();
 
@@ -16,7 +15,7 @@ export const GoTo = () => {
         })
         .catch((e) => setError(e.message));
     }
-  }, []);
+  }, [slug]);
 
   if (error)
     return (

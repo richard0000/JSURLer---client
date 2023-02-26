@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { createLink } from "../services/api";
+import env from "react-dotenv";
 
 export const Home = () => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [generatedSlug, setGeneratedSlug] = useState();
+  const baseUrl = env.BASE_URL;
+
+  if (!baseUrl) return <p>Please set the BASE_URL env variable</p>;
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -25,7 +29,9 @@ export const Home = () => {
           </div>
           <div className="mb-2">
             <h2>Your Slug</h2>
-            <p>{generatedSlug}</p>
+            <a
+              href={`${baseUrl}/${generatedSlug}`}
+            >{`${baseUrl}/${generatedSlug}`}</a>
           </div>
           <div className="mb-2">
             <button
@@ -82,7 +88,7 @@ export const Home = () => {
                 focus:ring-indigo-200
                 focus:ring-opacity-50
               "
-                placeholder="My long maps URL"
+                placeholder="My short URL title"
               />
             </label>
           </div>
@@ -92,6 +98,7 @@ export const Home = () => {
               <input
                 name="url"
                 type="text"
+                placeholder="My long maps URL"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 className="

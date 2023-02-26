@@ -1,6 +1,7 @@
 import axios from "axios";
+import env from 'react-dotenv';
 
-const baseURL = "http://localhost:5000";
+const baseURL = env.API_BASE_URL;
 
 export const createLink = async ({ url, title }) => {
   return await axios.post(`${baseURL}/slug`, {
